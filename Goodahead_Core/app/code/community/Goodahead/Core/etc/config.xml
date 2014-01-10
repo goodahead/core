@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * This file is part of Goodahead_Core extension
+ *
+ * This extension is supplied with every Goodahead extension and provide common
+ * features, used by Goodahead extensions.
+ *
+ * Copyright (C) 2013 Goodahead Ltd. (http://www.goodahead.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * and GNU General Public License along with this program.
+ * If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category   Goodahead
+ * @package    Goodahead_Core
+ * @copyright  Copyright (c) 2013 Goodahead Ltd. (http://www.goodahead.com)
+ * @license    http://www.gnu.org/licenses/lgpl-3.0-standalone.html
+ */
+-->
+<config>
+    <modules>
+        <Goodahead_Core>
+            <version>1.0.1</version>
+        </Goodahead_Core>
+    </modules>
+
+    <global>
+        <models>
+            <goodahead_core>
+                <class>Goodahead_Core_Model</class>
+                <resourceModel>goodahead_core_resource</resourceModel>
+            </goodahead_core>
+            <goodahead_core_resource>
+                <class>Goodahead_Core_Model_Resource</class>
+                <entities>
+                    <cms_update>
+                        <table>goodahead_core_cms_update</table>
+                    </cms_update>
+                </entities>
+            </goodahead_core_resource>
+        </models>
+        <resources>
+            <goodahead_core_setup>
+                <setup>
+                    <module>Goodahead_Core</module>
+                    <class>Goodahead_Core_Model_Resource_Setup</class>
+                </setup>
+            </goodahead_core_setup>
+        </resources>
+        <helpers>
+            <goodahead_core>
+                <class>Goodahead_Core_Helper</class>
+            </goodahead_core>
+        </helpers>
+        <blocks>
+            <goodahead_core>
+                <class>Goodahead_Core_Block</class>
+            </goodahead_core>
+        </blocks>
+        <events>
+            <core_abstract_save_after>
+                <observers>
+                    <goodahead_core_cms_block_save_after>
+                        <type>singleton</type>
+                        <class>goodahead_core/observer</class>
+                        <method>cmsBlockSaveAfter</method>
+                    </goodahead_core_cms_block_save_after>
+                </observers>
+            </core_abstract_save_after>
+            <cms_page_save_after>
+                <observers>
+                    <goodahead_core_cms_page_save_after>
+                        <type>singleton</type>
+                        <class>goodahead_core/observer</class>
+                        <method>cmsPageSaveAfter</method>
+                    </goodahead_core_cms_page_save_after>
+                </observers>
+            </cms_page_save_after>
+        </events>
+    </global>
+
+    <frontend>
+        <translate>
+            <modules>
+                <Goodahead_Core>
+                    <files>
+                        <default>Goodahead/Core.csv</default>
+                    </files>
+                </Goodahead_Core>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Goodahead_Core>
+                    <files>
+                        <default>Goodahead/Adminhtml/Core.csv</default>
+                    </files>
+                </Goodahead_Core>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <goodahead_core>
+            <toolbar>
+                <enabled>1</enabled>
+            </toolbar>
+        </goodahead_core>
+    </default>
+</config>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * This file is part of Goodahead_Core extension
+ *
+ * This extension is supplied with every Goodahead extension and provide common
+ * features, used by Goodahead extensions.
+ *
+ * Copyright (C) 2013 Goodahead Ltd. (http://www.goodahead.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * and GNU General Public License along with this program.
+ * If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category   Goodahead
+ * @package    Goodahead_Core
+ * @copyright  Copyright (c) 2013 Goodahead Ltd. (http://www.goodahead.com)
+ * @license    http://www.gnu.org/licenses/lgpl-3.0-standalone.html
+ */
+-->
+<config>
+    <global>
+        <goodahead>
+            <core>
+                <cms>
+                    <block>
+<!-- Blank Blocks Samples
+                        <block_name>
+                            <version>0.0.1</version>
+                            <store default="true"/>
+                            <identifier>test</identifier>
+                            <data>
+                                <title><![CDATA[]]></title>
+                                <content><![CDATA[]]></content>
+                                <is_active>1</is_active>
+                            </data>
+                        </block_name>
+                        <another_block>
+                            <version>0.0.1</version>
+                            <store>
+                                <default />
+                                <french />
+                            </store>
+                            <identifier>test</identifier>
+                            <data>
+                                <title><![CDATA[]]></title>
+                                <is_active>1</is_active>
+                                <content><![CDATA[]]></content>
+                            </data>
+                        </another_block>
+-->
+                    </block>
+                    <page>
+<!-- Blank Page sampe
+                        <page_name>
+                            <version>0.0.1</version>
+                            <store default="true"/>
+                            <identifier>about-magento-demo-store-test</identifier>
+                            <data>
+                                <title><![CDATA[]]></title>
+                                <root_template>one_column</root_template>
+                                <meta_keywords></meta_keywords>
+                                <meta_description></meta_description>
+                                <content_heading></content_heading>
+                                <content><![CDATA[]]></content>
+                                <is_active>1</is_active>
+                                <sort_order>0</sort_order>
+                                <layout_update_xml><![CDATA[]]></layout_update_xml>
+                                <custom_theme></custom_theme>
+                                <custom_root_template></custom_root_template>
+                                <custom_layout_update_xml><![CDATA[]]></custom_layout_update_xml>
+                                <custom_theme_from></custom_theme_from>
+                                <custom_theme_to></custom_theme_to>
+                            </data>
+                        </page_name>
+                        <another_page_name>
+                            <version>0.0.1</version>
+                            <store>
+                                <german />
+                            </store>
+                            <identifier>test-cms-page-01</identifier>
+                            <data>
+                                <title><![CDATA[]]></title>
+                                <root_template>one_column</root_template>
+                                <meta_keywords></meta_keywords>
+                                <meta_description></meta_description>
+                                <content_heading></content_heading>
+                                <content><![CDATA[]]></content>
+                                <is_active>1</is_active>
+                                <sort_order>0</sort_order>
+                                <layout_update_xml><![CDATA[]]></layout_update_xml>
+                                <custom_theme></custom_theme>
+                                <custom_root_template></custom_root_template>
+                                <custom_layout_update_xml><![CDATA[]]></custom_layout_update_xml>
+                                <custom_theme_from>now</custom_theme_from>
+                                <custom_theme_to>m/d/yyyy</custom_theme_to>
+                            </data>
+                        </another_page_name>
+-->
+                    </page>
+                </cms>
+            </core>
+        </goodahead>
+    </global>
+</config>
