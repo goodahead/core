@@ -1,0 +1,14 @@
+# Code & Extension configurations
+Goodahead_Core/app/etc/modules/Goodahead_Core.xml                                       app/etc/modules/Goodahead_Core.xml
+Goodahead_Core/app/etc/goodahead_core_version_map.xml                                   app/etc/goodahead_core_version_map.xml
+Goodahead_Core/app/code/community/Goodahead/Core/                                       app/code/community/Goodahead/Core/
+
+# Translations
+Goodahead_Core/app/locale/en_US/Goodahead/Core.csv                                      app/locale/en_US/Goodahead/Core.csv
+Goodahead_Core/app/locale/en_US/Goodahead/Adminhtml/Core.csv                            app/locale/en_US/Goodahead/Adminhtml/Core.csv
+
+# JavaScript files
+Goodahead_Core/js/goodahead/goodahead.js                                                js/goodahead/goodahead.js
+
+# Admin Skin
+Goodahead_Core/skin/adminhtml/default/default/goodahead/images/logo_tab_extension.png   skin/adminhtml/default/default/goodahead/images/logo_tab_extension.png

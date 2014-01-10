@@ -1,0 +1,16 @@
+{
+    "name": "goodahead/core",
+    "type": "magento-module",
+    "license": "LGPL-3.0+",
+    "homepage": "https://github.com/goodahead/core",
+    "description": "Goodahead Core Extension",
+    "authors":[
+        {
+            "name":"Goodahead",
+            "email":"support@goodahead.com"
+        }
+    ],
+    "require":{
+        "magento-hackathon/magento-composer-installer":"*"
+    }
+}
