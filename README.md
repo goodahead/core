@@ -119,19 +119,19 @@ that was changed from magento admin panel will not be updated unless
 Currently there's no way to manage ```force update mode``` from admin panel. 
 This functionality is planned for future extension releases.
 
-Sample [```cms.xml```](Goodahead_Core/app/code/community/Goodahead/Core/etc/cms.xml)
-is shipped together with this extension.
+You can find [```cms.xml```](Goodahead_Core/app/code/community/Goodahead/Core/etc/cms.xml)
+sample inside extension [```etc```](Goodahead_Core/app/code/community/Goodahead/Core/etc/) foldet.
 
 ### Magento Version Helper functions
 
-Goodaheda Core extension provides several helper functions to work with Magento
+Goodahead Core extension provides several helper functions to work with Magento
 version/edition information. Following functions are available from
 [```goodahead_core```](Goodahead_Core/app/code/community/Goodahead/Core/Helper/Data.php) helper:
 
 * ```getMagentoEdition``` &mdash; returns current magento edition (Community /
 Enterprise / Professional). Compatible with all magento versions starting from
 1.4.1 (corresponding ```getEdition``` function in Mage class appeared only 
-starting from 1.7+ Community edition and 1.12+ Enterprise edition).
+starting from 1.7+ Community Edition and 1.12+ Enterprise Edition).
 * ```getMagentoCoreVersion``` &mdash; return corresponding Magento Core version
 (Community Magento version number that correspond to current Magento version 
 number) for Enterpise and Professional Magento editions. Not 100% accurate (yet)
