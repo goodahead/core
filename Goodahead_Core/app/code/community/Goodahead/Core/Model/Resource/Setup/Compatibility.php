@@ -51,6 +51,10 @@ class Goodahead_Core_Model_Resource_Setup_Compatibility
     const LENGTH_INDEX_NAME     = 64;
     const LENGTH_FOREIGN_NAME   = 64;
 
+    const TIMESTAMP_INIT_UPDATE = 'TIMESTAMP_INIT_UPDATE';
+    const TIMESTAMP_INIT        = 'TIMESTAMP_INIT';
+    const TIMESTAMP_UPDATE      = 'TIMESTAMP_UPDATE';
+
     /**
      * Varien_Db_Helper data for backwards compatibility
      * Dictionary for generate short name
@@ -233,6 +237,46 @@ class Goodahead_Core_Model_Resource_Setup_Compatibility
     public static function addTranslate($from, $to)
     {
         self::$_translateMap[$from] = $to;
+    }
+
+    /**
+     * Using this method you can eliminate inconsistancy between default values
+     * for TIMESTAMP field in different magento versions
+     *
+     *  * in 1.4 -- 1.5 it was used as regular string / Zend_Db_Expr
+     *  * in 1.6+ there are predefined values for this field and it defaulted
+     *    to 0 in case if one of predefined values is used
+     *
+     * By applying this function to 'DEFAULT' argument for timestamp column and
+     * using one of the predefined constants you can be sure that result you
+     * receive will result in same column default value generation by
+     * Varien_Db_Adapter_Pdo_* no matter what Magento version is used
+     *
+     * @param $value mixed Default value definition for column
+     *
+     * @return string|Zend_Db_Expr|mixed Default value definition for column adapted to current Magento version
+     */
+    public static function getTimestampColumnDefaultValue($value)
+    {
+        if (is_string($value)) {
+            try {
+                $constName = 'Varien_Db_Ddl_Table::' . $value;
+                if (defined($constName)) {
+                    return constant($constName);
+                }
+            } catch (Exception $e) {}
+        }
+
+        switch ($value) {
+            case self::TIMESTAMP_INIT:
+                return new Zend_Db_Expr('CURRENT_TIMESTAMP');
+            case self::TIMESTAMP_UPDATE:
+                return new Zend_Db_Expr('0 ON UPDATE CURRENT_TIMESTAMP');
+            case self::TIMESTAMP_INIT_UPDATE:
+                return new Zend_Db_Expr('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
+            default:
+                return $value;
+        }
     }
 
 }

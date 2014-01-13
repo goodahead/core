@@ -70,9 +70,9 @@ class Goodahead_Core_Helper_Data extends Mage_Core_Helper_Abstract
             if (method_exists('Mage', 'getEdition')) {
                 self::$_magentoEdition = Mage::getEdition();
             } else {
-                if (Mage::getConfig()->getModuleConfig('Enterprise_Checkout')) {
+                if (@Mage::getConfig()->getModuleConfig('Enterprise_Checkout')) {
                     self::$_magentoEdition = self::MAGENTO_EDITION_EE;
-                } elseif (Mage::getConfig()->getModuleConfig('Enterprise_Enterprise')) {
+                } elseif (@Mage::getConfig()->getModuleConfig('Enterprise_Enterprise')) {
                     self::$_magentoEdition = self::MAGENTO_EDITION_PE;
                 } else {
                     self::$_magentoEdition = self::MAGENTO_EDITION_CE;
