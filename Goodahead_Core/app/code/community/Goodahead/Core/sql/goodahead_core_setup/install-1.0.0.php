@@ -114,7 +114,7 @@ $table = $installer->getConnection()
         $installer->getIdxName(
             'goodahead_core/cms_update',
             array('cms_item_id')),
-        array('cms_item_id'))
-    ->setComment('CMS Block/Page update resource table');
+        array('cms_item_id'));
 
-$installer->getConnection()->createTable($table);
+$table->setOption('comment', 'CMS Block/Page update resource table');
+$installer->createTable($table);

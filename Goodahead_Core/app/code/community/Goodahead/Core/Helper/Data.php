@@ -5,7 +5,7 @@
  * This extension is supplied with every Goodahead extension and provide common
  * features, used by Goodahead extensions.
  *
- * Copyright (C) 2013 Goodahead Ltd. (http://www.goodahead.com)
+ * Copyright (C) 2014 Goodahead Ltd. (http://www.goodahead.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -23,7 +23,7 @@
  *
  * @category   Goodahead
  * @package    Goodahead_Core
- * @copyright  Copyright (c) 2013 Goodahead Ltd. (http://www.goodahead.com)
+ * @copyright  Copyright (c) 2014 Goodahead Ltd. (http://www.goodahead.com)
  * @license    http://www.gnu.org/licenses/lgpl-3.0-standalone.html
  */
 
@@ -50,14 +50,14 @@ class Goodahead_Core_Helper_Data extends Mage_Core_Helper_Abstract
      * @var string
      */
     static protected $_magentoEdition;
+    static protected $_magentoEditionPredispatch;
 
     /**
-     * Current Magento edition
+     * Current Magento version
      *
      * @var string
      */
     static protected  $_magentoCoreVersion;
-
 
     /**
      * Return current Magento edition
@@ -70,12 +70,38 @@ class Goodahead_Core_Helper_Data extends Mage_Core_Helper_Abstract
             if (method_exists('Mage', 'getEdition')) {
                 self::$_magentoEdition = Mage::getEdition();
             } else {
-                if (@Mage::getConfig()->getModuleConfig('Enterprise_Checkout')) {
-                    self::$_magentoEdition = self::MAGENTO_EDITION_EE;
-                } elseif (@Mage::getConfig()->getModuleConfig('Enterprise_Enterprise')) {
-                    self::$_magentoEdition = self::MAGENTO_EDITION_PE;
+                if ($modules = Mage::getConfig()->getModuleConfig() !== false) {
+                    if (Mage::getConfig()->getModuleConfig('Enterprise_Checkout')) {
+                        self::$_magentoEdition = self::MAGENTO_EDITION_EE;
+                    } elseif (Mage::getConfig()->getModuleConfig('Enterprise_Enterprise')) {
+                        self::$_magentoEdition = self::MAGENTO_EDITION_PE;
+                    } else {
+                        self::$_magentoEdition = self::MAGENTO_EDITION_CE;
+                    }
                 } else {
-                    self::$_magentoEdition = self::MAGENTO_EDITION_CE;
+                    /**
+                     * Possibly on predispatch stage. Separate cache for edition
+                     * result check. Verify actual class existence by checking
+                     * class constants (not reliable if someone has copied-over
+                     * Enterprise modules and installed them on Community
+                     * Magento, but who cares for people violating licenses?)
+                     */
+                    if (!isset(self::$_magentoEditionPredispatch)) {
+                        try {
+                            if (@class_exists('Enterprise_Checkout_Helper_Data')) {
+                                self::$_magentoEditionPredispatch = self::MAGENTO_EDITION_EE;
+                                return self::$_magentoEditionPredispatch;
+                            }
+                        } catch (Exception $e) {}
+                        try {
+                            if (@class_exists('Enterprise_Enterprise_Model_Observer')) {
+                                self::$_magentoEditionPredispatch = self::MAGENTO_EDITION_PE;
+                                return self::$_magentoEditionPredispatch;
+                            }
+                        } catch (Exception $e) {}
+                        self::$_magentoEditionPredispatch = self::MAGENTO_EDITION_CE;
+                    }
+                    return self::$_magentoEditionPredispatch;
                 }
             }
         }

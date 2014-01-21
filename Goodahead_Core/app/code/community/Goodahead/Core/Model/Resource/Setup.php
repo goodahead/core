@@ -202,4 +202,11 @@ class Goodahead_Core_Model_Resource_Setup
         }
     }
 
+    public function createTable(Varien_Db_Ddl_Table $table)
+    {
+        Goodahead_Core_Model_Resource_Setup_Compatibility::createTable(
+            $this, $table
+        );
+    }
+
 }

@@ -115,12 +115,5 @@ $table = $installer->getConnection()
             'goodahead_core/cms_update',
             array('cms_item_id')),
         array('cms_item_id'));
-
-$comment = 'CMS Block/Page update resource table';
-if (method_exists($table, 'setComment')) {
-    $table->setComment($comment);
-} else {
-    $table->setOption('comment', $comment);
-}
-
-$installer->getConnection()->createTable($table);
+$table->setOption('comment', 'CMS Block/Page update resource table');
+$installer->createTable($table);

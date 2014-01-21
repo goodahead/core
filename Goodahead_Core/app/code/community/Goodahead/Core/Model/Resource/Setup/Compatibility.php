@@ -279,4 +279,53 @@ class Goodahead_Core_Model_Resource_Setup_Compatibility
         }
     }
 
+    public static function createTable(Mage_Core_Model_Resource_Setup $installer, Varien_Db_Ddl_Table $table)
+    {
+        $connection = $installer->getConnection();
+        if (method_exists($table, 'setComment')) {
+            if (($comment = $table->getOption('comment')) !== null) {
+                $table->setComment($comment);
+            }
+        }
+        $connection->createTable($table);
+
+        /**
+         * Old PDO Adapter Mysql with no autoincrement support on createTable
+         * we need to add autoincrement for this column
+         */
+        if (
+            $connection instanceof Varien_Db_Adapter_Pdo_Mysql
+            && !defined('Varien_Db_Adapter_Pdo_Mysql::LENGTH_TABLE_NAME')
+        ) {
+            foreach ($table->getColumns() as $column) {
+                if (!empty($column['IDENTITY']) || !empty($column['AUTO_INCREMENT'])) {
+                    $createTable = $connection->getCreateTable($table->getName());
+                    $columnNamePattern = preg_quote($connection->quoteIdentifier($column['COLUMN_NAME']),'/');
+                    /**
+                     * This is not advanced pattern for mysql column definition
+                     * syntax.
+                     *
+                     * But we don't need to worry about anything else except
+                     * default definition to determine AUTO_INCREMENT insertion
+                     * position, because in old version of PDO Adapter Mysql any
+                     * other column definition parts are not supported
+                     *
+                     * So this pattern should be just fine to correct issues
+                     * with old version of PDO Adapter Mysql
+                     */
+                    $pattern = "/.*?^\\s+{$columnNamePattern}(.+?)( default.+?)?,?$.*/msi";
+
+                    $columnDefinition = preg_replace($pattern,'$1 auto_increment$2', $createTable, 1);
+                    $connection->modifyColumn($table->getName(), $column['COLUMN_NAME'], $columnDefinition);
+
+                    /**
+                     * Mysql support only one AUTO_INCREMENT column
+                     */
+                    break;
+                }
+            }
+
+        }
+    }
+
 }
