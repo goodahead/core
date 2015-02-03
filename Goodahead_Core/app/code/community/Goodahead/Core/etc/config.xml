@@ -34,7 +34,6 @@
             <version>1.0.1</version>
         </Goodahead_Core>
     </modules>
-
     <global>
         <models>
             <goodahead_core>
@@ -49,6 +48,14 @@
                     </cms_update>
                 </entities>
             </goodahead_core_resource>
+            <!-- Core_Model_Email_Template Rewrite -->
+            <!-- This rewrite of Core_Model_Email_Template is needed to add new Events into it's methods. -->
+            <core>
+                <rewrite>
+                    <email_template>Goodahead_Core_Model_Email_Template</email_template>
+                </rewrite>
+            </core>
+            <!-- END Core_Model_Email_Template Rewrite -->
         </models>
         <resources>
             <goodahead_core_setup>
@@ -89,7 +96,6 @@
             </cms_page_save_after>
         </events>
     </global>
-
     <frontend>
         <translate>
             <modules>
@@ -101,7 +107,6 @@
             </modules>
         </translate>
     </frontend>
-
     <adminhtml>
         <translate>
             <modules>
@@ -113,7 +118,6 @@
             </modules>
         </translate>
     </adminhtml>
-
     <default>
         <goodahead_core>
             <toolbar>
