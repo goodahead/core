@@ -60,4 +60,42 @@ class Goodahead_Core_Model_Email_Template
         Mage::dispatchEvent('goodahead_core_email_template_send_after', array('object' => $this, 'email' => $email, 'name' => $name, 'variables' => $variables));
         return $result;
     }
+    
+    /**
+     * Send transactional email to recipient
+     *
+     * @param   int $templateId
+     * @param   string|array $sender sender information, can be declared as part of config path
+     * @param   string $email recipient email
+     * @param   string $name recipient name
+     * @param   array $vars variables which can be used in template
+     * @param   int|null $storeId
+     *
+     * @throws Mage_Core_Exception
+     *
+     * @return  Mage_Core_Model_Email_Template
+     */
+    public function sendTransactional($templateId, $sender, $email, $name, $vars=array(), $storeId=null)
+    {
+        Mage::dispatchEvent('goodahead_core_email_template_sendTransactional_before', array('object' => $this, 
+                                                                                            'template_id' => $templateId, 
+                                                                                            'sender' => $sender, 
+                                                                                            'email' => $email, 
+                                                                                            'name' => $name, 
+                                                                                            'variables' => $vars, 
+                                                                                            'stoer_id' => $storeId)
+                                                                                        );
+        
+        $result = parent::sendTransactional($templateId, $sender, $email, $name, $vars, $storeId);
+        
+        Mage::dispatchEvent('goodahead_core_email_template_sendTransactional_after', array('object' => $this, 
+                                                                                           'template_id' => $templateId, 
+                                                                                           'sender' => $sender, 
+                                                                                           'email' => $email, 
+                                                                                           'name' => $name, 
+                                                                                           'variables' => $vars, 
+                                                                                           'stoer_id' => $storeId)
+                                                                                        );
+        return $result;
+    }
 }
