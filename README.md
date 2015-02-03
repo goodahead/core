@@ -155,3 +155,15 @@ script.
 
 Please note that some parts require additional verification (like shown in
 [mysql4-install-1.0.0.php](Goodahead_Core/app/code/community/Goodahead/Core/sql/goodahead_core_setup/mysql4-install-1.0.0.php))
+
+### Extra events to Mage_Core_Model_Email_Template
+
+As we know, this part of Magento is a pain to customize, and hundreds of extensions overwrites this class methods ```Mage_Core_Model_Email_Template::send()```, ```Mage_Core_Model_Email_Template::sendTransactional()```, and  ```Mage_Core_Model_Email_Template::loadDefault()```. What to do if you need to use or to build a few extensions with logic in that methods, but you have no events appropriate triggered? -- NOTHING :-(
+
+So, here we have a simple solution, that should help you to avoid problems.
+Now, if you need to add observer to Magento's kind of mailer, than you can use this events:
+ * ```goodahead_core_email_template_loadDefault_before``` AND ```goodahead_core_email_template_loadDefault_after```;
+ * ```goodahead_core_email_template_send_before``` AND ```goodahead_core_email_template_send_after```;
+ * ```goodahead_core_email_template_sendTransactional_before``` AND ```goodahead_core_email_template_sendTransactional_after```;
+    
+IF you still REALLY need to overwrite ```Mage_Core_Model_Email_Template``` -- you have to overwrite [```Goodahead_Core_Model_Email_Template```](Goodahead_Core/app/code/community/Goodahead/Core/Model/Email/Template.php) instead, and VERY IMPORTANT(!!!) is to make sure, that event triggers are not removed.
